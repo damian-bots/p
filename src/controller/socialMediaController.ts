@@ -3,6 +3,7 @@ import {
   checkInstaUrl,
   checkTeraBoxUrl,
   checkYouTubeUrl,
+  isValidUrl,
 } from "../regex";
 import { instagram, terabox, youtube, facebook } from "./media";
 
@@ -58,11 +59,4 @@ export async function socialMediaController(link: string) {
     console.log("error in bot function:-", error);
   }
 }
-function isValidUrl(url: string | URL) {
-  try {
-    new URL(url);
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
+

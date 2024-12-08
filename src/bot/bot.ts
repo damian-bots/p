@@ -2,6 +2,7 @@
 import { Context, Markup, Telegraf } from "telegraf";
 import { socialMediaController } from "../controller/socialMediaController";
 import { sendFile } from "../utils/index";
+import { isValidUrl } from "../regex";
 
 const BOT_TOKEN = process.env.BOT_TOKEN || "";
 const bot = new Telegraf(BOT_TOKEN);
@@ -21,13 +22,19 @@ bot.start(async (ctx) => {
   }
 });
 
-bot.on("message", async (ctx: Context) => {
+bot.on("text", async (ctx: Context) => {
   try {
     if (ctx.message && "text" in ctx.message) {
       console.log("ctx.message-->>", ctx.message);
 
       const messageText = ctx.message.text;
       console.log("messageText-->>", messageText);
+
+      if (!isValidUrl(messageText)) {
+        await ctx.reply(messageText === "hi" ? "Hey there" : "Invalid URL.");
+        return;
+      }
+
       await ctx.reply("Processing... Please wait.");
       const details = await socialMediaController(messageText);
       console.log("details", JSON.stringify(details, null, 2));
@@ -47,9 +54,12 @@ bot.on("sticker", (ctx) => ctx.reply("👍"));
 bot.hears("hi", (ctx) => ctx.reply("Hey there"));
 
 export const launchBot = () => {
-  bot.launch().then(() => {
-    console.log("Bot launched successfully");
-  }).catch((e) => {
-    console.error("Error launching bot:", e);
-  });
+  bot
+    .launch()
+    .then(() => {
+      console.log("Bot launched successfully");
+    })
+    .catch((e) => {
+      console.error("Error launching bot:", e);
+    });
 };

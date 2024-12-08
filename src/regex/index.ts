@@ -56,3 +56,12 @@ export function checkFacebookUrl(url: string) {
   }
   return false;
 }
+
+export function isValidUrl(url: string | URL) {
+  try {
+    new URL(url);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
