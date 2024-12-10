@@ -3,6 +3,7 @@ import { Context, Markup, Telegraf } from "telegraf";
 import { socialMediaController } from "../controller/socialMediaController";
 import { sendFile } from "../utils/index";
 import { isValidUrl } from "../regex";
+import axios from "axios";
 
 const BOT_TOKEN = process.env.BOT_TOKEN || "";
 const bot = new Telegraf(BOT_TOKEN);
@@ -36,6 +37,13 @@ bot.on("text", async (ctx: Context) => {
       }
 
       await ctx.reply("Processing... Please wait.");
+      const response = await axios.get("https://v2.jokeapi.dev/joke/Dark?blacklistFlags=religious,racist,sexist&type=single");
+
+      const joke = response.data.joke;
+
+      // Sending the joke to the user
+      await ctx.reply(`Here's a little something to make you smile while we process your request: 😄\n\n${joke}`);
+
       const details = await socialMediaController(messageText);
       console.log("details", JSON.stringify(details, null, 2));
 

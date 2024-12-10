@@ -45,7 +45,7 @@ export async function socialMediaController(link: string) {
       return { status: true, data: results,platform: "terabox" };
     } else if (checkYouTubeUrl(link)) {
       const results = await youtube(link);
-      return { status: results.success, data: results.data, platform: "youtube" };
+      return { status: true, data: results, platform: "youtube" };
     } else if (checkInstaUrl(link)) {
       const results = await instagram(link);
       return { status: true, data: results, platform: "instagram" };

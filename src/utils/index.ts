@@ -40,16 +40,12 @@ export const sendFile = async (item: any, ctx: any) => {
   try {
     // await ctx.replyWithDocument(item);
     console.log("item-->>", item);
-    if (
-      item &&
-      item.platform === "youtube" &&
-      item.data &&
-      item.success === true
-    ) {
-      const videoPath = path.resolve(item.data);
+    if (item && item.platform === "youtube") {
+      const videoPath = path.resolve(item.data.data);
+      console.log("videoPath------------>>>", videoPath);
       const videoStream = createReadStream(videoPath);
       await ctx.replyWithVideo({ source: videoStream });
-      await deleteFile(item.data);
+      await deleteFile(item.data.data);
     } else if (item && item.platform === "instagram") {
       await ctx.replyWithMarkdown(
         `👉 [Download Here](${item.data.data.url_list})`
@@ -89,7 +85,9 @@ export const sendFile = async (item: any, ctx: any) => {
   } catch (e: any) {
     console.log("error from sendFile: ", e);
     ctx.replyWithMarkdown(
-      `⚠️ ${e.message}\n\n👉 Try manually downloading from [here](${item})\n\n👉 *Maybe This File Is Too Large Or Cannot Accessible From ${item.platform}*`
+      `⚠️ ${e.message}\n\n👉 *Maybe This File Is Too Large Or Cannot Accessible From ${item.platform}*`
     );
+    await deleteFile(item.data.data);
+
   }
 };
