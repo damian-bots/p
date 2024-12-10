@@ -48,7 +48,7 @@ export const sendFile = async (item: any, ctx: any) => {
       await deleteFile(item.data.data);
     } else if (item && item.platform === "instagram") {
       await ctx.replyWithMarkdown(
-        `👉 [Download Here](${item.data.data.url_list})`
+        `👉 [Click here to download](${item.data.data})`
       );
     } else if (item && item.platform === "facebook") {
       const { url, sd, hd, title, thumbnail } = item.data.data;
