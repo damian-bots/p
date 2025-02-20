@@ -11,10 +11,10 @@ const bot = new Telegraf(BOT_TOKEN);
 bot.start(async (ctx) => {
   try {
     await ctx.reply(
-      `Hi ${ctx.message.from.first_name},\n\nI can Download Files from Terabox.\n\nMade with ❤️ by @rishi\n\nSend any facebook, instagram, youtube, terabox link to download.`,
+      `Hi ${ctx.message.from.first_name},\n\nI can Download Files from Terabox.\n\nMade with ❤️ by @DeadlineTech\n\nSend any facebook, instagram, youtube, terabox link to download.`,
       Markup.inlineKeyboard([
-        Markup.button.url("Owner", "https://t.me/rishi171099"),
-        Markup.button.url("Report bug", "https://t.me/Tamoghna17"),
+        Markup.button.url("Owner", "https://t.me/its_damiann"),
+        Markup.button.url("Report bug", "https://t.me/deadlineTechSupport"),
       ])
     );
   } catch (e) {
