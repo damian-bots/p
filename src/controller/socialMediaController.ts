@@ -1,11 +1,8 @@
 import {
-  checkFacebookUrl,
   checkInstaUrl,
-  checkTeraBoxUrl,
-  checkYouTubeUrl,
   isValidUrl,
 } from "../regex";
-import { instagram, terabox, youtube, facebook } from "./media";
+import { instagram } from "./media";
 
 // export async function socialMediaCntrollerWeb(req: any, res: any) {
 //   try {
@@ -39,19 +36,9 @@ export async function socialMediaController(link: string) {
   try {
     if (!isValidUrl(link)) {
       return { status: true, data: "invalid url" };
-    }
-    if (checkTeraBoxUrl(link)) {
-      const results = await terabox(link);
-      return { status: true, data: results,platform: "terabox" };
-    } else if (checkYouTubeUrl(link)) {
-      const results = await youtube(link);
-      return { status: true, data: results, platform: "youtube" };
     } else if (checkInstaUrl(link)) {
       const results = await instagram(link);
       return { status: true, data: results, platform: "instagram" };
-    } else if (checkFacebookUrl(link)) {
-      const results = await facebook(link);
-      return { status: true, data: results,platform: "facebook" };
     } else {
       return { status: true, data: "unknown url" };
     }
