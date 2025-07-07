@@ -13,8 +13,8 @@ bot.start(async (ctx) => {
     await ctx.reply(
       `Hi ${ctx.message.from.first_name},\n\nI can Download Files from Terabox.\n\nMade with ❤️ by @DeadlineTechTeam\n\nSend any instagram link to download.`,
       Markup.inlineKeyboard([
-        Markup.button.url("Updates 📢", "https://t.me/its_damiann"),
-        Markup.button.url("Report bug 👾", "https://t.me/deadlineTechSupport"),
+        Markup.button.url("📡 Updates", "https://t.me/DeadlineTechTeam"),
+        Markup.button.url("👾 Report bug", "https://t.me/deadlineTechSupport"),
       ])
     );
   } catch (e) {
